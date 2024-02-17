@@ -11,19 +11,19 @@ import java.time.LocalDateTime
 @Dao
 interface TaskDao {
 
-    @Query("SELECT * FROM tasks ORDER BY dueDate DESC")
+    @Query("SELECT * FROM tasks ORDER BY startDateTime DESC")
     fun getAll(): Flow<List<Task>>
 
-    @Query("SELECT * FROM tasks WHERE dueDate= :date")
+    @Query("SELECT * FROM tasks WHERE startDateTime= :date")
     fun getAllByDate(date: LocalDateTime): Flow<List<Task>>
 
-    @Query("SELECT * FROM tasks WHERE category= :id")
-    fun getAllByCategory(id: Int): Flow<List<Task>>
+    @Query("SELECT * FROM tasks WHERE categoryId= :categoryId")
+    fun getAllByCategory(categoryId: Int): Flow<List<Task>>
 
     @Query("SELECT * FROM tasks WHERE title= :text")
     fun getAllByTitle(text: String): Flow<List<Task>>
 
-    @Query("SELECT * FROM tasks WHERE id= :id")
+    @Query("SELECT * FROM tasks WHERE id LIKE :id")
     suspend fun getOne(id: Int): Task?
 
     @Upsert
@@ -34,4 +34,7 @@ interface TaskDao {
 
     @Query("DELETE FROM tasks")
     suspend fun deleteAll()
+
+    @Query("UPDATE tasks SET completed= true WHERE id= :id")
+    suspend fun completeOne(id: Int)
 }

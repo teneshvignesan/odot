@@ -1,4 +1,4 @@
-package com.teneshvignesan.odot.screen.task
+package com.teneshvignesan.odot.presentation.task
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,27 +20,29 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 
-data class TaskScreen(val taskId: Long?): Screen {
+data class TaskScreen(val taskId: Long?) : Screen {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
 
         val navigator = LocalNavigator.currentOrThrow
+        val viewModel = viewModel<TaskViewModel>()
 
         Scaffold(
             topBar = {
                 CenterAlignedTopAppBar(
                     title = {
-                            Text(
-                                text = "Create New Task",
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.SemiBold,
-                                textAlign = TextAlign.Center
-                            )
+                        Text(
+                            text = "Create New Task",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.SemiBold,
+                            textAlign = TextAlign.Center
+                        )
                     },
                     navigationIcon = {
                         IconButton(

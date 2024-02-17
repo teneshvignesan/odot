@@ -7,12 +7,12 @@ import java.time.ZoneOffset
 
 class DateConverter {
     @TypeConverter
-    fun timeStampToDate(value: Long?): LocalDateTime? {
+    fun timeStampToDateTime(value: Long?): LocalDateTime? {
         return value?.let { LocalDateTime.ofInstant(Instant.ofEpochMilli(value), ZoneOffset.UTC) }
     }
 
     @TypeConverter
-    fun dateToTimestamp(date: LocalDateTime?): Long? {
+    fun dateTimeToTimestamp(date: LocalDateTime?): Long? {
         return date?.atZone(ZoneOffset.UTC)?.toInstant()?.toEpochMilli()
     }
 }
