@@ -7,6 +7,7 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
 import com.teneshvignesan.odot.design.OdotTheme
 import com.teneshvignesan.odot.presentation.home.HomeScreen
+import com.teneshvignesan.odot.presentation.task.TaskScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
