@@ -1,5 +1,6 @@
 package com.teneshvignesan.odot.presentation.task
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -30,17 +31,70 @@ class TaskViewModel @Inject constructor(
                     title = event.value
                 )
             }
+
             is TaskEvent.DescriptionChanged -> {
                 _state.value = _state.value.copy(
                     description = event.value
                 )
             }
-            is TaskEvent.CategoryChanged -> TODO()
-            is TaskEvent.CompletedChanged -> TODO()
-            is TaskEvent.DeleteTask -> TODO()
-            is TaskEvent.EndDateTimeChanged -> TODO()
-            is TaskEvent.SaveTask -> TODO()
-            is TaskEvent.StartDateTimeChanged -> TODO()
+
+            is TaskEvent.CategoryChanged -> {
+                _state.value = _state.value.copy(
+                    selectedCategoryId = event.value
+                )
+            }
+
+            is TaskEvent.CompletedChanged -> {
+                Log.d("CompletedChanged", event.value.toString())
+            }
+
+            is TaskEvent.DeleteTask -> {
+                Log.d("DeleteTask", event.toString())
+            }
+
+            is TaskEvent.SaveTask -> {
+                Log.d("SaveTask", event.toString())
+            }
+
+            is TaskEvent.ToggleDatePickerDialog -> {
+                if (event.value) {
+                    _state.value = _state.value.copy(
+                        showDatePicker = true
+                    )
+                    return
+                }
+
+                _state.value = _state.value.copy(
+                    showDatePicker = false
+                )
+            }
+
+            is TaskEvent.ToggleTimePickerDialog -> {
+                if (event.value) {
+                    _state.value = _state.value.copy(
+                        showTimePicker = true
+                    )
+                    return
+                }
+
+                _state.value = _state.value.copy(
+                    showTimePicker = false
+                )
+            }
+
+            is TaskEvent.StartDateChanged -> {
+
+                _state.value = _state.value.copy(
+                    startDate = event.value
+                )
+            }
+
+            is TaskEvent.StartTimeChanged -> {
+
+                _state.value = _state.value.copy(
+                    startTime = event.value
+                )
+            }
         }
     }
 

@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a6603ec04cc1dad9d6cbf5f60623235c",
+    "identityHash": "4a5e2f446e8f58e388f3a04253669cb5",
     "entities": [
       {
         "tableName": "tasks",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `categoryId` INTEGER, `startDateTime` INTEGER NOT NULL, `endDateTime` INTEGER NOT NULL, `completed` INTEGER NOT NULL, FOREIGN KEY(`categoryId`) REFERENCES `categories`(`id`) ON UPDATE CASCADE ON DELETE SET NULL )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `categoryId` INTEGER, `startDateTime` INTEGER NOT NULL, `completed` INTEGER NOT NULL, FOREIGN KEY(`categoryId`) REFERENCES `categories`(`id`) ON UPDATE CASCADE ON DELETE SET NULL )",
         "fields": [
           {
             "fieldPath": "id",
@@ -35,12 +35,6 @@
           {
             "fieldPath": "startDateTime",
             "columnName": "startDateTime",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "endDateTime",
-            "columnName": "endDateTime",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -112,7 +106,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a6603ec04cc1dad9d6cbf5f60623235c')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4a5e2f446e8f58e388f3a04253669cb5')"
     ]
   }
 }

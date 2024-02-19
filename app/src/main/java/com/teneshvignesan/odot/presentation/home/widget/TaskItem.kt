@@ -31,8 +31,6 @@ fun TaskItem(
     ) {
 
         val startTimeInString = task.startDateTime.format(DateTimeFormatter.ofPattern("HH:mm a"))
-        val endTimeInString = task.endDateTime.format(DateTimeFormatter.ofPattern("HH:mm a"))
-        val durationInString = "$startTimeInString - $endTimeInString"
 
         Text(
             modifier = Modifier.padding(start = 10.dp, end = 10.dp, bottom = 15.dp, top = 15.dp),
@@ -54,7 +52,7 @@ fun TaskItem(
             Text(
                 modifier = Modifier
                     .padding(horizontal = 4.dp),
-                text = durationInString.replace("am", "AM").replace("pm", "PM"),
+                text = startTimeInString.replace("am", "AM").replace("pm", "PM"),
                 style = MaterialTheme.typography.bodySmall,
 
                 )
@@ -72,7 +70,6 @@ fun PreviewTaskItem() {
             title = "Start the day with workout routine",
             description = "Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available",
             startDateTime = LocalDateTime.now(),
-            endDateTime = LocalDateTime.now()
         )
     )
 }

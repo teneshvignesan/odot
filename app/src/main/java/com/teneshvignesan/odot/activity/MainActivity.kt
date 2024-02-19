@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         setContent {
             OdotTheme {
-                Navigator(screen = HomeScreen()) { navigator ->
+                Navigator(screen = TaskScreen()) { navigator ->
                     SlideTransition(navigator)
                 }
             }

@@ -24,6 +24,5 @@ data class Task(
     @ColumnInfo(name = "description") val description: String,
     @ColumnInfo(name = "categoryId", index = true) val categoryId: Int? = null,
     @ColumnInfo(name = "startDateTime") val startDateTime: LocalDateTime,
-    @ColumnInfo(name = "endDateTime") val endDateTime: LocalDateTime,
     @ColumnInfo(name = "completed") val completed: Boolean = false,
 )
