@@ -26,3 +26,5 @@ data class Task(
     @ColumnInfo(name = "startDateTime") val startDateTime: LocalDateTime,
     @ColumnInfo(name = "completed") val completed: Boolean = false,
 )
+
+class InvalidTaskException(message: String): Exception(message)

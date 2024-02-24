@@ -3,11 +3,10 @@ package com.teneshvignesan.odot.activity
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import cafe.adriel.voyager.navigator.Navigator
-import cafe.adriel.voyager.transitions.SlideTransition
+import androidx.navigation.compose.rememberNavController
 import com.teneshvignesan.odot.design.OdotTheme
-import com.teneshvignesan.odot.presentation.home.HomeScreen
-import com.teneshvignesan.odot.presentation.task.TaskScreen
+import com.teneshvignesan.odot.navigation.Screen
+import com.teneshvignesan.odot.navigation.SetupNavGraph
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,9 +17,11 @@ class MainActivity : AppCompatActivity() {
 
         setContent {
             OdotTheme {
-                Navigator(screen = TaskScreen()) { navigator ->
-                    SlideTransition(navigator)
-                }
+                val navHostController = rememberNavController()
+                SetupNavGraph(
+                    startDestination = Screen.HomeScreen.route,
+                    navHostController = navHostController
+                )
             }
         }
     }

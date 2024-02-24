@@ -15,5 +15,5 @@ interface TaskRepository {
 
     suspend fun deleteAll()
 
-    suspend fun completeOne(id: Int)
+    suspend fun completeOne(id: Int, completed: Boolean)
 }

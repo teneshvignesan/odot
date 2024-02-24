@@ -6,11 +6,7 @@ import java.time.LocalTime
 
 data class TaskState(
     var currentId: Int? = null,
-    val categories: List<Category> = listOf(
-        Category(1, "House"),
-        Category(2, "Work"),
-        Category(3, "Hobby")
-    ),
+    val categories: List<Category> = emptyList(),
     var title: String = "",
     var description: String = "",
     var startDate: LocalDate = LocalDate.now(),

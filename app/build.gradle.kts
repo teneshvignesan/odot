@@ -75,11 +75,6 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.48.1")
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
     ksp("com.google.dagger:hilt-compiler:2.48.1")
-    implementation("cafe.adriel.voyager:voyager-navigator:1.0.0")
-    implementation("cafe.adriel.voyager:voyager-transitions:1.0.0")
-    implementation("cafe.adriel.voyager:voyager-screenmodel:1.0.0")
-    implementation("cafe.adriel.voyager:voyager-livedata:1.0.0")
-    implementation("cafe.adriel.voyager:voyager-hilt:1.0.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

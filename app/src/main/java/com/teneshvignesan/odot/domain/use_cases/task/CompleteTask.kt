@@ -5,7 +5,7 @@ import com.teneshvignesan.odot.domain.repository.TaskRepository
 class CompleteTask(
     private val repository: TaskRepository
 ){
-    suspend operator fun invoke(id: Int) {
-        return repository.completeOne(id)
+    suspend operator fun invoke(id: Int, completed: Boolean) {
+        return repository.completeOne(id,completed)
     }
 }

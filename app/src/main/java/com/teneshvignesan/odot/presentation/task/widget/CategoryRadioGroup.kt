@@ -12,24 +12,22 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.teneshvignesan.odot.domain.model.Category
-
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun CategoryRadioGroup(
     categories: List<Category>,
-    selectedCategoryId: Int? = 2,
-    onSelectedCategory: (Int) -> Unit
+    defaultId: Int? = null,
+    onClick: (Int) -> Unit
 ) {
 
-    var currentSelectedCategoryId by remember { mutableStateOf(selectedCategoryId) }
+    var currentId by remember { mutableStateOf(defaultId) }
 
     FlowRow {
         for (category in categories) {
-            if(category.id === currentSelectedCategoryId) {
+            if(category.id === currentId) {
                 Button(
                     modifier = Modifier.padding(horizontal = 5.dp),
                     onClick = {}
@@ -38,12 +36,12 @@ fun CategoryRadioGroup(
                 }
             }
 
-            if(category.id !== currentSelectedCategoryId) {
+            if(category.id !== currentId) {
                 OutlinedButton(
                     modifier = Modifier.padding(horizontal = 5.dp),
                     onClick = {
-                        currentSelectedCategoryId = category.id
-                        currentSelectedCategoryId?.let { onSelectedCategory(it) }
+                        currentId = category.id
+                        currentId?.let { onClick(it) }
                     }
                 ) {
                     Text(text = category.title)
@@ -51,15 +49,4 @@ fun CategoryRadioGroup(
             }
         }
     }
-}
-
-@Preview(
-    showSystemUi = true
-)
-@Composable
-fun PreviewCategoryItem() {
-    CategoryRadioGroup(
-        categories = emptyList(),
-        onSelectedCategory = {}
-    )
 }

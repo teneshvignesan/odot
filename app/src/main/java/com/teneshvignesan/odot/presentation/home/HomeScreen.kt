@@ -25,87 +25,96 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.hilt.getViewModel
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
-import com.teneshvignesan.odot.domain.model.Task
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.teneshvignesan.odot.presentation.home.widget.TaskItem
-import com.teneshvignesan.odot.presentation.task.TaskScreen
 
-class HomeScreen : Screen {
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    override fun Content() {
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun HomeScreen(
+    navigateToTaskScreen: () -> Unit,
+    navigateToTaskScreenWithArgs: (Int) -> Unit,
+    viewModel: HomeViewModel = hiltViewModel()
+) {
 
-        val navigator = LocalNavigator.currentOrThrow
-        val viewModel = getViewModel<HomeViewModel>()
-
-        Scaffold(
-            topBar = {
-                CenterAlignedTopAppBar(
-                    title = {},
-                    navigationIcon = {
-                        IconButton(
-                            onClick = { /*TODO*/ }
-                        ) {
-                            Icon(
-                                modifier = Modifier.width(20.dp),
-                                imageVector = Icons.Filled.Menu,
-                                contentDescription = "Menu"
-                            )
-                        }
-                    },
-                    actions = {
-                        IconButton(
-                            onClick = { /*TODO*/ }
-                        ) {
-                            Icon(
-                                modifier = Modifier.width(20.dp),
-                                imageVector = Icons.Filled.DateRange,
-                                contentDescription = "Search tales"
-                            )
-                        }
+    Scaffold(
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {},
+                navigationIcon = {
+                    IconButton(
+                        onClick = { /*TODO*/ }
+                    ) {
+                        Icon(
+                            modifier = Modifier.width(20.dp),
+                            imageVector = Icons.Filled.Menu,
+                            contentDescription = "Menu"
+                        )
                     }
-                )
-            },
-            floatingActionButton = {
-                FloatingActionButton(
-                    onClick = { navigator.push(TaskScreen(null)) }
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.Add,
-                        contentDescription = "Add new tale"
-                    )
+                },
+                actions = {
+                    IconButton(
+                        onClick = { /*TODO*/ }
+                    ) {
+                        Icon(
+                            modifier = Modifier.width(20.dp),
+                            imageVector = Icons.Filled.DateRange,
+                            contentDescription = "Search task"
+                        )
+                    }
                 }
-            },
-            content = { innerPadding ->
-                Column(
-                    modifier = Modifier
-                        .padding(innerPadding)
-                        .padding(horizontal = 10.dp)
-                        .fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                ) {
+            )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = { navigateToTaskScreen() }
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Add,
+                    contentDescription = "Add new tale"
+                )
+            }
+        },
+        content = { innerPadding ->
+            Column(
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .padding(horizontal = 10.dp)
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+            ) {
 
-                    if (viewModel.state.value.tasks.isEmpty()) {
-                        EmptyTasksContent()
-                    }
+                if (viewModel.state.value.tasks.isEmpty()) {
+                    EmptyTasksContent()
+                }
 
-                    if (viewModel.state.value.tasks.isNotEmpty()) {
-                        LazyColumn(
-                            modifier = Modifier.fillMaxSize(),
-                        ) {
-                            items(viewModel.state.value.tasks) { task ->
-                                TaskItem(task)
+                if (viewModel.state.value.tasks.isNotEmpty()) {
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                    ) {
+                        items(viewModel.state.value.tasks) { task ->
+                            if (task.id !== null) {
+                                TaskItem(
+                                    task,
+                                    {
+                                        navigateToTaskScreenWithArgs(task.id)
+                                    },
+                                    {
+                                        viewModel.onEvent(
+                                            HomeEvent.CompletedTask(
+                                                task.id,
+                                                !task.completed
+                                            )
+                                        )
+                                    },
+                                )
                             }
                         }
                     }
                 }
-            },
-        )
-    }
+            }
+        },
+    )
 }
 
 @Composable

@@ -26,7 +26,7 @@ class TaskRepositoryImpl(private val dao: TaskDao): TaskRepository {
         return dao.deleteAll()
     }
 
-    override suspend fun completeOne(id: Int) {
-        return dao.completeOne(id)
+    override suspend fun completeOne(id: Int, completed: Boolean) {
+        return dao.completeOne(id, completed)
     }
 }
