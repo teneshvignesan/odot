@@ -46,7 +46,7 @@ fun TaskItem(
                 modifier = Modifier.padding(
                     start = 10.dp,
                     end = 10.dp,
-                    bottom = 15.dp,
+                    bottom = 5.dp,
                     top = 15.dp
                 ),
                 text = task.title,
